@@ -7,12 +7,16 @@ hooks:
   BeforeInstall:
     - location: deploy/preinstall.sh
       timeout: 300
+      runas: ubuntu
   AfterInstall:
     - location: deploy/postinstall.sh
       timeout: 300
+      runas: ubuntu
   ApplicationStart:
     - location: deploy/start.sh
       timeout: 300
+      runas: ubuntu
   ApplicationStop:
     - location: deploy/stop.sh
       timeout: 300
+      runas: ubuntu
