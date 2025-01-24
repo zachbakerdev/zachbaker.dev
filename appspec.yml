@@ -1,0 +1,18 @@
+version: 0.0
+os: linux
+files:
+  - source: /
+    destination: /home/ubuntu/new-zachbaker.dev
+hooks:
+  BeforeInstall:
+    - location: deploy/preinstall.sh
+      timeout: 300
+  AfterInstall:
+    - location: deploy/postinstall.sh
+      timeout: 300
+  ApplicationStart:
+    - location: deploy/start.sh
+      timeout: 300
+  ApplicationStop:
+    - location: deploy/stop.sh
+      timeout: 300
