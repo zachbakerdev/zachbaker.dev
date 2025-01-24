@@ -21,5 +21,5 @@ jobs:
       - run: |
           echo "Deploying branch ${{ env.GITHUB_REF }} to ${{ github.event.inputs.environment }}"
           commit_hash=`git rev-parse HEAD`
-          deployment_id=`aws deploy create-deployment --application-name zachbaker.dev --deployment-group-name main --github-location repository=$GITHUB_REPOSITORY,commitId=$commit_hash --ignore-application-stop-failures`
+          deployment_id=`aws deploy create-deployment --application-name zachbaker.dev --deployment-group-name main --github-location repository=$GITHUB_REPOSITORY,commitId=$commit_hash --ignore-application-stop-failures --output text --query DeploymentId`
           aws deploy wait deployment-successful --deployment-id $deployment_id
