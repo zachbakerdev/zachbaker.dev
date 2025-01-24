@@ -3,5 +3,6 @@ aws --region us-east-2 secretsmanager get-secret-value --secret-id $PROD_SECRET_
 convert-json-env secrets.json --out .env
 sudo n 20
 npm ci
+npm run payload migrate
 npm run build
 sudo chown -hR ubuntu ./
