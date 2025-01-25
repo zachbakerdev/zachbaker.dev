@@ -18,6 +18,11 @@ const nextConfig = {
           protocol: url.protocol.replace(':', ''),
         }
       }),
+      {
+        protocol: 'https',
+        hostname: 'zachbaker.dev',
+        pathname: '**'
+      }
     ],
   },
   reactStrictMode: true,
