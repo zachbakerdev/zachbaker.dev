@@ -15,7 +15,7 @@ export default async function Page() {
   const payload = await getPayload({ config: configPromise })
 
   const posts = await payload.find({
-    collection: 'posts',
+    collection: 'markdown_posts',
     depth: 1,
     limit: 12,
     overrideAccess: false,

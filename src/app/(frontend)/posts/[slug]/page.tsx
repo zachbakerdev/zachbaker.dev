@@ -14,11 +14,14 @@ import { PostHero } from '@/heros/PostHero'
 import { generateMeta } from '@/utilities/generateMeta'
 import PageClient from './page.client'
 import { LivePreviewListener } from '@/components/LivePreviewListener'
+import Markdown from 'react-markdown';
+import remarkGfm from 'remark-gfm'
+import { MarkdownPostHero } from '@/heros/MarkdownPostHero'
 
 export async function generateStaticParams() {
   const payload = await getPayload({ config: configPromise })
   const posts = await payload.find({
-    collection: 'posts',
+    collection: 'markdown_posts',
     draft: false,
     limit: 1000,
     overrideAccess: false,
@@ -58,18 +61,15 @@ export default async function Post({ params: paramsPromise }: Args) {
 
       {draft && <LivePreviewListener />}
 
-      <PostHero post={post} />
+      <MarkdownPostHero post={post} />
 
-      <div className="flex flex-col items-center gap-4 pt-8">
-        <div className="container">
-          <RichText className="max-w-[48rem] mx-auto" data={post.content} enableGutter={false} />
-          {post.relatedPosts && post.relatedPosts.length > 0 && (
-            <RelatedPosts
-              className="mt-12 max-w-[52rem] lg:grid lg:grid-cols-subgrid col-start-1 col-span-3 grid-rows-[2fr]"
-              docs={post.relatedPosts.filter((post) => typeof post === 'object')}
-            />
-          )}
-        </div>
+      <div className='container md:prose-md dark:prose-invert max-w-[48rem] mx-auto'>
+        <Markdown
+          className="prose"
+          remarkPlugins={[[remarkGfm]]}
+        >
+          {post.content}
+        </Markdown>
       </div>
     </article>
   )
@@ -88,7 +88,7 @@ const queryPostBySlug = cache(async ({ slug }: { slug: string }) => {
   const payload = await getPayload({ config: configPromise })
 
   const result = await payload.find({
-    collection: 'posts',
+    collection: 'markdown_posts',
     draft,
     limit: 1,
     overrideAccess: draft,
