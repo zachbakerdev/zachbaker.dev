@@ -1,5 +1,6 @@
 {
-  "name": "payload-test",
+  "name": "zachbakerdev",
+  "private": true,
   "version": "1.0.0",
   "description": "Website template for Payload",
   "license": "MIT",
