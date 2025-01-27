@@ -7,3 +7,4 @@ npm ci
 npm run payload migrate
 npm run build
 sudo chown -hR ubuntu ./
+exit 1
