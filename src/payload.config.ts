@@ -35,6 +35,7 @@ export default buildConfig({
     },
     user: Users.slug,
     livePreview: {
+      url: 'https://zachbaker.dev',
       breakpoints: [
         {
           label: 'Mobile',
