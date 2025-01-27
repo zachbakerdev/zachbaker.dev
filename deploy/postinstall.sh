@@ -1,3 +1,4 @@
+set -e
 source /home/ubuntu/.bashrc
 cd /home/ubuntu/new-zachbaker.dev || exit 1
 aws --region us-east-2 secretsmanager get-secret-value --secret-id $PROD_SECRET_ARN --query SecretString --output text > secrets.json
@@ -7,4 +8,3 @@ npm ci
 npm run payload migrate
 npm run build
 sudo chown -hR ubuntu ./
-exit 1
