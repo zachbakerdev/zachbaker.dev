@@ -24,6 +24,6 @@ permissions:
   - object: /home/ubuntu/zachbaker.dev
     pattern: "**"
     owner: ubuntu
-    mode: 744
+    mode: 777
     type:
       - file
