@@ -20,3 +20,10 @@ hooks:
     - location: deploy/stop.sh
       timeout: 300
       runas: ubuntu
+permissions:
+  - object: /home/ubuntu/zachbaker.dev
+    pattern: "**"
+    owner: ubuntu
+    mode: 744
+    type:
+      - file

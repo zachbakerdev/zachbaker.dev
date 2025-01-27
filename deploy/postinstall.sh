@@ -8,4 +8,3 @@ sudo n 20
 npm ci
 npm run payload migrate
 npm run build
-sudo chown -hR ubuntu ./
