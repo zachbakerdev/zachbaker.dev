@@ -5,7 +5,6 @@ import configPromise from '@payload-config'
 import { getPayload } from 'payload'
 import { draftMode } from 'next/headers'
 import React, { cache } from 'react'
-import { homeStatic } from '@/endpoints/seed/home-static'
 
 import type { Page as PageType } from '@/payload-types'
 
@@ -28,15 +27,13 @@ export async function generateStaticParams() {
     },
   })
 
-  const params = pages.docs
+  return pages.docs
     ?.filter((doc) => {
       return doc.slug !== 'home'
     })
     .map(({ slug }) => {
       return { slug }
     })
-
-  return params
 }
 
 type Args = {
@@ -50,16 +47,9 @@ export default async function Page({ params: paramsPromise }: Args) {
   const { slug = 'home' } = await paramsPromise
   const url = '/' + slug
 
-  let page: PageType | null
-
-  page = await queryPageBySlug({
+  const page: PageType | null = await queryPageBySlug({
     slug,
   })
-
-  // Remove this code once your website is seeded
-  if (!page && slug === 'home') {
-    page = homeStatic
-  }
 
   if (!page) {
     return <PayloadRedirects url={url} />
