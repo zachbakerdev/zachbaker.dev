@@ -137,7 +137,7 @@ export interface Page {
       | null;
     media?: (number | null) | Media;
   };
-  layout: (CallToActionBlock | ContentBlock | MediaBlock | ArchiveBlock | FormBlock)[];
+  layout: (CallToActionBlock | ContentBlock | MediaBlock | ArchiveBlock | FormBlock | MarkdownBlock)[];
   meta?: {
     title?: string | null;
     /**
@@ -674,6 +674,16 @@ export interface Form {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "MarkdownBlock".
+ */
+export interface MarkdownBlock {
+  markdown: string;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'markdown';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "markdown_posts".
  */
 export interface MarkdownPost {
@@ -999,6 +1009,7 @@ export interface PagesSelect<T extends boolean = true> {
         mediaBlock?: T | MediaBlockSelect<T>;
         archive?: T | ArchiveBlockSelect<T>;
         formBlock?: T | FormBlockSelect<T>;
+        markdown?: T | MarkdownBlockSelect<T>;
       };
   meta?:
     | T
@@ -1095,6 +1106,15 @@ export interface FormBlockSelect<T extends boolean = true> {
   form?: T;
   enableIntro?: T;
   introContent?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "MarkdownBlock_select".
+ */
+export interface MarkdownBlockSelect<T extends boolean = true> {
+  markdown?: T;
   id?: T;
   blockName?: T;
 }
