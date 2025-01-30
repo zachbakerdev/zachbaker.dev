@@ -17,6 +17,8 @@ import { plugins } from './plugins'
 import { defaultLexical } from '@/fields/defaultLexical'
 import { getServerSideURL } from './utilities/getURL'
 import { MarkdownPosts } from '@/collections/MarkdownPost'
+import { nodemailerAdapter } from '@payloadcms/email-nodemailer'
+import { email } from '@/utilities/email'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -58,6 +60,11 @@ export default buildConfig({
     pool: {
       connectionString: process.env.DATABASE_URI || '',
     },
+  }),
+  email: nodemailerAdapter({
+    defaultFromAddress: "noreply@notify.zachbaker.dev",
+    defaultFromName: "Zach",
+    transportOptions: email
   }),
   collections: [Pages, MarkdownPosts, Posts, Media, Categories, Users],
   cors: [getServerSideURL()].filter(Boolean),
