@@ -63,9 +63,9 @@ export default async function Post({ params: paramsPromise }: Args) {
 
       <MarkdownPostHero post={post} />
 
-      <div className='container md:prose-md dark:prose-invert max-w-[48rem] mx-auto'>
+      <div className='container max-w-[48rem] mx-auto'>
         <Markdown
-          className="prose"
+          className="prose md:prose-md dark:prose-invert"
           remarkPlugins={[[remarkGfm]]}
         >
           {post.content}
