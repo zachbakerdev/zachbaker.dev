@@ -1,5 +1,5 @@
 /** @type {import('tailwindcss').Config} */
-export default {
+const config = {
   content: [
     './pages/**/*.{ts,tsx}',
     './components/**/*.{ts,tsx}',
@@ -104,7 +104,7 @@ export default {
           to: { height: '0' },
         },
       },
-      typography: ({ theme }) => ({
+      typography: () => ({
         DEFAULT: {
           css: [
             {
@@ -146,3 +146,5 @@ export default {
     },
   },
 }
+
+export default config;
