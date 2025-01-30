@@ -769,8 +769,8 @@ export interface Search {
   title?: string | null;
   priority?: number | null;
   doc: {
-    relationTo: 'posts';
-    value: number | Post;
+    relationTo: 'markdown_posts';
+    value: number | MarkdownPost;
   };
   slug?: string | null;
   meta?: {
