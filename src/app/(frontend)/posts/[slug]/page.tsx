@@ -1,22 +1,37 @@
 import type { Metadata } from 'next'
 
-import { RelatedPosts } from '@/blocks/RelatedPosts/Component'
 import { PayloadRedirects } from '@/components/PayloadRedirects'
 import configPromise from '@payload-config'
 import { getPayload } from 'payload'
 import { draftMode } from 'next/headers'
 import React, { cache } from 'react'
-import RichText from '@/components/RichText'
-
-import type { Post } from '@/payload-types'
-
-import { PostHero } from '@/heros/PostHero'
 import { generateMeta } from '@/utilities/generateMeta'
 import PageClient from './page.client'
 import { LivePreviewListener } from '@/components/LivePreviewListener'
-import Markdown from 'react-markdown';
+import Markdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 import { MarkdownPostHero } from '@/heros/MarkdownPostHero'
+import remarkRehype from 'remark-rehype'
+import rehypePrism from 'rehype-prism'
+
+// Prism Theme
+import 'prismjs/themes/prism-tomorrow.min.css'
+
+// Prism Languages
+;[
+  'bash',
+  'css',
+  'javascript',
+  'json',
+  'jsx',
+  'markup',
+  'python',
+  'tsx',
+  'typescript',
+  'yaml',
+].forEach((l) => {
+  import('prismjs/components/prism-' + l)
+})
 
 export async function generateStaticParams() {
   const payload = await getPayload({ config: configPromise })
@@ -31,11 +46,9 @@ export async function generateStaticParams() {
     },
   })
 
-  const params = posts.docs.map(({ slug }) => {
+  return posts.docs.map(({ slug }) => {
     return { slug }
-  })
-
-  return params
+  });
 }
 
 type Args = {
@@ -63,10 +76,14 @@ export default async function Post({ params: paramsPromise }: Args) {
 
       <MarkdownPostHero post={post} />
 
-      <div className='container max-w-[48rem] mx-auto'>
+      <div className="container max-w-[48rem] mx-auto">
         <Markdown
           className="prose md:prose-md dark:prose-invert"
-          remarkPlugins={[[remarkGfm]]}
+          remarkPlugins={[
+            [remarkGfm],
+            [remarkRehype],
+            [rehypePrism, { plugins: ['copy-to-clipboard'] }],
+          ]}
         >
           {post.content}
         </Markdown>

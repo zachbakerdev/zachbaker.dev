@@ -113,7 +113,7 @@ export default {
               h1: {
                 fontWeight: 'normal',
                 marginBottom: '0.25em',
-              },
+              }
             },
           ],
         },
