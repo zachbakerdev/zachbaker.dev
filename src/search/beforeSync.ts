@@ -1,10 +1,6 @@
 import { BeforeSync, DocToSync } from '@payloadcms/plugin-search/types'
-import { getPayload } from 'payload'
-import config from "@payload-config";
 
-export const beforeSyncWithSearch: BeforeSync = async ({ originalDoc, searchDoc }) => {
-  const payload = await getPayload({ config });
-
+export const beforeSyncWithSearch: BeforeSync = async ({ originalDoc, searchDoc, req, req: { payload } }) => {
   const {
     doc: { relationTo: collection },
   } = searchDoc
@@ -29,7 +25,8 @@ export const beforeSyncWithSearch: BeforeSync = async ({ originalDoc, searchDoc 
       modifiedDoc.categories = await Promise.all(categories.map(async (category: number) => {
         const { id, title } = await payload.findByID({
           collection: 'categories',
-          id: category
+          id: category,
+          req
         });
 
         console.log(id, title);
