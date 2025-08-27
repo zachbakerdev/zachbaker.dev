@@ -15,7 +15,7 @@ Clone repo and install dependencies
 
 ```shell
 git clone git@github.com:zachbakerdev/zachbaker.dev.git
-cd zcahbaker.dev
+cd zachbaker.dev
 npm install
 ```
 
