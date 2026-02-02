@@ -61,11 +61,6 @@ export default buildConfig({
       connectionString: process.env.DATABASE_URI || '',
     },
   }),
-  email: nodemailerAdapter({
-    defaultFromAddress: "noreply@notify.zachbaker.dev",
-    defaultFromName: "Zach",
-    transportOptions: email
-  }),
   collections: [Pages, MarkdownPosts, Posts, Media, Categories, Users],
   cors: [getServerSideURL()].filter(Boolean),
   globals: [Header, Footer],

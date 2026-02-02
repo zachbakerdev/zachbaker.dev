@@ -27,7 +27,10 @@ const nextConfig = {
   },
   reactStrictMode: true,
   redirects,
-  productionBrowserSourceMaps: true
+  productionBrowserSourceMaps: true,
+  turbopack: {
+
+  }
 }
 
 export default withPayload(nextConfig)
